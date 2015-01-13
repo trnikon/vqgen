@@ -821,7 +821,7 @@ $(function(){
 
 	$('.handle3').click(function() {
 		$.ajax({
-			url : "vqcachefile.php?cachefile=<?php echo (isset($_GET['vqcachefile'])&&$_GET['vqcachefile']=='mods.cache'?MODSCACHE:CACHE . $_GET['vqcachefile']); ?>",
+			url : "vqcachefile.php?cachefile=<?php if(isset($_GET['vqcachefile'])){ echo ($_GET['vqcachefile']=='mods.cache')? MODSCACHE : CACHE.$_GET['vqcachefile']; }?>",
 			dataType: "json",
 			success: function(data){
 				$("#cache").val(data);
@@ -841,7 +841,7 @@ $(function(){
 	});
 	
 	$('#add3').click(function() {
-		location.href = '<?php echo './?enable=' .$_GET['file']; ?>';
+		location.href = '<?php if(isset($_GET['file'])) echo "./?enable=" . $_GET['file']; ?>';
 	});
 	
 	$('#file_list').change(function() {
